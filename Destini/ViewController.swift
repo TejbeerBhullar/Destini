@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!         // Has TAG = 1
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
+    @IBOutlet weak var restartButtonOutlet: UIButton!
     
     // TODO Step 5: Initialise instance variables here
     
@@ -43,19 +44,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
-        storyTextView.text = story1
-        topButton.setTitle(answer1a, for: .normal)
-        bottomButton.setTitle(answer1b, for: .normal)
-        number = 1
         
+        startOver()
+    
     }
 
     
     // User presses one of the buttons
+    
+    
+    @IBAction func restartButton(_ sender: UIButton) {
+        startOver()
+    
+    }
+    
     @IBAction func buttonPressed(_ sender: UIButton) {
     
         // TODO Step 4: Write an IF-Statement to update the views
-        if sender.tag == 1 && (number == 1 || number == 3){
+        if sender.tag == 1 && (number == 1 || number == 2){
             storyTextView.text = story3
             topButton.setTitle(answer3a, for: .normal)
             bottomButton.setTitle(answer3b, for: .normal)
@@ -67,7 +73,7 @@ class ViewController: UIViewController {
             bottomButton.setTitle(answer2b, for: .normal)
             number = 2
         }
-        else if sender.tag == 1 && number == 2{
+        else if sender.tag == 1 && number == 3{
             storyTextView.text = story6
             topButton.isHidden = true
             bottomButton.isHidden = true
@@ -84,9 +90,25 @@ class ViewController: UIViewController {
             topButton.isHidden = true
             bottomButton.isHidden = true
             number = 4
+            
         }
+        if number == 4 || number == 5 || number == 6 {
+            restartButtonOutlet.isHidden = false
+        }
+        
+    }
+    
+    func startOver(){
+        storyTextView.text = story1
+        topButton.isHidden = false
+        bottomButton.isHidden = false
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
+        number = 1
+        restartButtonOutlet.isHidden = true
         
         
     }
+    
 }
 
